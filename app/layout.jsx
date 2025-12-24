@@ -1,7 +1,6 @@
 import './globals.css'
-import { Metadata } from 'next'
 
-export const metadata: Metadata = {
+export const metadata = {
   title: 'Multi-Vendor Marketplace - Shop from Multiple Sellers',
   description: 'Discover products from verified sellers with secure payments, fast shipping, and affiliate rewards. Join our multi-vendor marketplace today!',
   keywords: 'marketplace, multi-vendor, e-commerce, online shopping, affiliate marketing',

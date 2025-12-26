@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
+import Navbar from '@/components/Navbar'
 import api from '@/lib/api'
 
 export default function AdminSellersPage() {
@@ -27,7 +27,7 @@ export default function AdminSellersPage() {
 
   const deleteSeller = async (id) => {
     if (!confirm('Are you sure you want to remove this seller?')) return
-    
+
     try {
       await api.delete(`/admin/sellers/${id}`)
       setSellers(sellers.filter(seller => seller.id !== id))
@@ -40,11 +40,11 @@ export default function AdminSellersPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold">Manage Sellers</h1>
-          <button 
+          <button
             onClick={() => router.push('/admin/dashboard')}
             className="btn-secondary"
           >
@@ -103,7 +103,6 @@ export default function AdminSellersPage() {
         )}
       </div>
 
-      <Footer />
     </div>
   )
 }

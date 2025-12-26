@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { authAPI } from '@/lib/api'
 import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
+import Navbar from '@/components/Navbar'
 
 export default function ProfilePage() {
   const router = useRouter()
@@ -169,7 +169,6 @@ export default function ProfilePage() {
         </div>
       </div>
 
-      <Footer />
     </div>
   )
 }

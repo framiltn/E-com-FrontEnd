@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
+import Navbar from '@/components/Navbar'
 
 export default function DashboardLayout({ children }) {
     const pathname = usePathname()
@@ -32,8 +32,8 @@ export default function DashboardLayout({ children }) {
                                             key={item.name}
                                             href={item.href}
                                             className={`block px-4 py-2 rounded-lg text-sm font-medium transition ${isActive
-                                                    ? 'bg-blue-50 text-primary'
-                                                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                                                ? 'bg-blue-50 text-primary'
+                                                : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                                                 }`}
                                         >
                                             {item.name}
@@ -51,8 +51,6 @@ export default function DashboardLayout({ children }) {
 
                 </div>
             </main>
-
-            <Footer />
         </div>
     )
 }

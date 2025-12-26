@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import api from '@/lib/api'
 import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
+import Link from 'next/link'
 
 export default function SellerDashboard() {
   const [stats, setStats] = useState(null)
@@ -34,7 +34,7 @@ export default function SellerDashboard() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <h1 className="text-3xl font-bold mb-8">Seller Dashboard</h1>
 
@@ -86,7 +86,6 @@ export default function SellerDashboard() {
         </div>
       </div>
 
-      <Footer />
     </div>
   )
 }

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { categoryAPI } from '@/lib/api'
 import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
+import Navbar from '@/components/Navbar'
 
 export default function CategoriesPage() {
   const [categories, setCategories] = useState([])
@@ -34,7 +34,7 @@ export default function CategoriesPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <h1 className="text-3xl font-bold mb-8">Shop by Category</h1>
 
@@ -63,7 +63,6 @@ export default function CategoriesPage() {
         )}
       </div>
 
-      <Footer />
     </div>
   )
 }

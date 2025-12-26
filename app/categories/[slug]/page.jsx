@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { productAPI } from '@/lib/api'
 import Navbar from '@/components/Navbar'
 import ProductCard from '@/components/ProductCard'
-import Footer from '@/components/Footer'
+import Navbar from '@/components/Navbar'
 
 export default function CategoryPage({ params }) {
   const [products, setProducts] = useState([])
@@ -47,7 +47,6 @@ export default function CategoryPage({ params }) {
         )}
       </div>
 
-      <Footer />
     </div>
   )
 }

@@ -4,7 +4,6 @@ import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 import ProductGrid from '@/components/ProductGrid'
 import CategoryGrid from '@/components/CategoryGrid'
-import Footer from '@/components/Footer'
 import { authAPI } from '@/lib/api'
 
 export default function Home() {
@@ -86,8 +85,6 @@ export default function Home() {
           <ProductGrid />
         </>
       )}
-
-      <Footer />
     </div>
   )
 }

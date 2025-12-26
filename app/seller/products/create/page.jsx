@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import api, { categoryAPI } from '@/lib/api'
 import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
+import Navbar from '@/components/Navbar'
 
 export default function CreateProductPage() {
   const router = useRouter()
@@ -149,7 +149,6 @@ export default function CreateProductPage() {
         </form>
       </div>
 
-      <Footer />
     </div>
   )
 }

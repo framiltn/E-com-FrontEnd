@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { orderAPI } from '@/lib/api'
 import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
+import Navbar from '@/components/Navbar'
 
 export default function OrderDetailsPage({ params }) {
   const router = useRouter()
@@ -128,7 +128,6 @@ export default function OrderDetailsPage({ params }) {
         </div>
       </div>
 
-      <Footer />
     </div>
   )
 }

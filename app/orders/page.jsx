@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { orderAPI } from '@/lib/api'
 import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
+import Navbar from '@/components/Navbar'
 
 export default function OrdersPage() {
   const [orders, setOrders] = useState([])
@@ -45,7 +45,7 @@ export default function OrdersPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <h1 className="text-3xl font-bold mb-8">My Orders</h1>
 
@@ -102,7 +102,6 @@ export default function OrdersPage() {
         )}
       </div>
 
-      <Footer />
     </div>
   )
 }

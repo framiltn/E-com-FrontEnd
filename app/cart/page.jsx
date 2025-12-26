@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { cartAPI, getAssetUrl } from '@/lib/api'
 import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
+import Navbar from '@/components/Navbar'
 
 export default function CartPage() {
   const router = useRouter()
@@ -156,7 +156,6 @@ export default function CartPage() {
         )}
       </div>
 
-      <Footer />
     </div>
   )
 }

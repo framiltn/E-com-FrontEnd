@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react'
 import { affiliateAPI } from '@/lib/api'
 import Navbar from '@/components/Navbar'
-import Navbar from '@/components/Navbar'
 
 export default function AffiliatePage() {
   const [affiliate, setAffiliate] = useState(null)

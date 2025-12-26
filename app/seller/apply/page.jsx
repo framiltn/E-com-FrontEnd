@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import api from '@/lib/api'
 import Navbar from '@/components/Navbar'
-import Navbar from '@/components/Navbar'
 
 export default function SellerApplyPage() {
   const router = useRouter()

@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { categoryAPI } from '@/lib/api'
 import Navbar from '@/components/Navbar'
-import Navbar from '@/components/Navbar'
 
 export default function CategoriesPage() {
   const [categories, setCategories] = useState([])

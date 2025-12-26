@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import api from '@/lib/api'
 import Navbar from '@/components/Navbar'
-import Link from 'next/link'
 
 export default function SellerDashboard() {
   const [stats, setStats] = useState(null)

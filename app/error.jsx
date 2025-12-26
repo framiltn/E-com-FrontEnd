@@ -16,7 +16,7 @@ export default function Error({ error, reset }) {
                         Oops! Something went wrong
                     </h1>
                     <p className="text-gray-600">
-                        We're sorry for the inconvenience. Please try again.
+                        We&apos;re sorry for the inconvenience. Please try again.
                     </p>
                 </div>
 

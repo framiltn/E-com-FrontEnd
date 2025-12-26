@@ -1,5 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { orderAPI } from '@/lib/api'
 import Navbar from '@/components/Navbar'
@@ -10,11 +11,7 @@ export default function OrderDetailsPage({ params }) {
   const [order, setOrder] = useState(null)
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    fetchOrder()
-  }, [params.id])
-
-  const fetchOrder = async () => {
+  const fetchOrder = useCallback(async () => {
     try {
       const response = await orderAPI.getById(params.id)
       setOrder(response.data.data)
@@ -23,7 +20,11 @@ export default function OrderDetailsPage({ params }) {
     } finally {
       setLoading(false)
     }
-  }
+  }, [params.id])
+
+  useEffect(() => {
+    fetchOrder()
+  }, [fetchOrder])
 
   const cancelOrder = async () => {
     if (!confirm('Are you sure you want to cancel this order?')) return
@@ -53,7 +54,7 @@ export default function OrderDetailsPage({ params }) {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold">Order #{order.id}</h1>
@@ -91,7 +92,7 @@ export default function OrderDetailsPage({ params }) {
           <div className="lg:col-span-1 space-y-4">
             <div className="card">
               <h2 className="text-xl font-bold mb-4">Order Summary</h2>
-              
+
               <div className="space-y-2 mb-4">
                 <div className="flex justify-between">
                   <span>Status</span>

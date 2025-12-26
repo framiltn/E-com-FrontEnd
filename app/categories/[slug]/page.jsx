@@ -11,27 +11,26 @@ export default function CategoryPage({ params }) {
   const [categoryName, setCategoryName] = useState('')
 
   useEffect(() => {
+    const fetchCategoryProducts = async () => {
+      try {
+        const response = await productAPI.getAll({ category: params.slug })
+        setProducts(response.data.data || [])
+        if (response.data.data.length > 0) {
+          setCategoryName(response.data.data[0].category?.name || 'Category')
+        }
+      } catch (error) {
+        console.error('Error:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
     fetchCategoryProducts()
   }, [params.slug])
-
-  const fetchCategoryProducts = async () => {
-    try {
-      const response = await productAPI.getAll({ category: params.slug })
-      setProducts(response.data.data || [])
-      if (response.data.data.length > 0) {
-        setCategoryName(response.data.data[0].category?.name || 'Category')
-      }
-    } catch (error) {
-      console.error('Error:', error)
-    } finally {
-      setLoading(false)
-    }
-  }
 
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <h1 className="text-3xl font-bold mb-8">{categoryName}</h1>
 

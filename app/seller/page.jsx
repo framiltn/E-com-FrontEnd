@@ -7,7 +7,7 @@ export default function SellerRedirect() {
 
   useEffect(() => {
     router.replace('/seller/dashboard')
-  }, [])
+  }, [router])
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center">

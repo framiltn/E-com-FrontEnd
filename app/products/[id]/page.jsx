@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
@@ -17,19 +18,18 @@ export default function ProductDetailsPage({ params }) {
   const [isAddingToWishlist, setIsAddingToWishlist] = useState(false)
 
   useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const response = await productAPI.getById(params.id)
+        setProduct(response.data.data)
+      } catch (error) {
+        console.error('Error:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
     fetchProduct()
   }, [params.id])
-
-  const fetchProduct = async () => {
-    try {
-      const response = await productAPI.getById(params.id)
-      setProduct(response.data.data)
-    } catch (error) {
-      console.error('Error:', error)
-    } finally {
-      setLoading(false)
-    }
-  }
 
   const addToCart = async () => {
     setIsAdding(true)

@@ -13,21 +13,20 @@ export default function ProfilePage() {
   const [formData, setFormData] = useState({ name: '', email: '' })
 
   useEffect(() => {
-    fetchUser()
-  }, [])
-
-  const fetchUser = async () => {
-    try {
-      const response = await authAPI.getUser()
-      setUser(response.data)
-      setFormData({ name: response.data.name, email: response.data.email })
-    } catch (error) {
-      console.error('Error:', error)
-      router.push('/login')
-    } finally {
-      setLoading(false)
+    const fetchUser = async () => {
+      try {
+        const response = await authAPI.getUser()
+        setUser(response.data)
+        setFormData({ name: response.data.name, email: response.data.email })
+      } catch (error) {
+        console.error('Error:', error)
+        router.push('/login')
+      } finally {
+        setLoading(false)
+      }
     }
-  }
+    fetchUser()
+  }, [router])
 
   const handleLogout = async () => {
     try {

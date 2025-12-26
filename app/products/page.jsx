@@ -1,6 +1,6 @@
 'use client'
-import { useState, useEffect } from 'react'
-import { productAPI } from '@/lib/api'
+import { useState, useEffect, useCallback } from 'react'
+import { productAPI, getAssetUrl } from '@/lib/api'
 import Navbar from '@/components/Navbar'
 import ProductCard from '@/components/ProductCard'
 import Footer from '@/components/Footer'
@@ -15,11 +15,7 @@ export default function ProductsPage() {
     sort: 'newest'
   })
 
-  useEffect(() => {
-    fetchProducts()
-  }, [filters])
-
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     setLoading(true)
     try {
       const response = await productAPI.getAll({ ...filters, q: search })
@@ -30,7 +26,11 @@ export default function ProductsPage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [filters, search])
+
+  useEffect(() => {
+    fetchProducts()
+  }, [fetchProducts])
 
   const handleSearch = (e) => {
     e.preventDefault()
@@ -40,7 +40,7 @@ export default function ProductsPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <h1 className="text-3xl font-bold mb-8">All Products</h1>
 
@@ -54,7 +54,7 @@ export default function ProductsPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
-            
+
             <input
               type="number"
               placeholder="Min Price"
@@ -62,7 +62,7 @@ export default function ProductsPage() {
               value={filters.min_price}
               onChange={(e) => setFilters({ ...filters, min_price: e.target.value })}
             />
-            
+
             <input
               type="number"
               placeholder="Max Price"
@@ -70,7 +70,7 @@ export default function ProductsPage() {
               value={filters.max_price}
               onChange={(e) => setFilters({ ...filters, max_price: e.target.value })}
             />
-            
+
             <select
               className="input-field"
               value={filters.sort}

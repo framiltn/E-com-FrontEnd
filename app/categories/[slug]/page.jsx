@@ -13,12 +13,14 @@ export default function CategoryPage({ params }) {
     const fetchCategoryProducts = async () => {
       try {
         const response = await productAPI.getAll({ category: params.slug })
+        console.log('Category API Response:', response)
+        console.log('Category API Data:', response.data)
         setProducts(response.data.data || [])
-        if (response.data.data.length > 0) {
+        if (response.data.data && response.data.data.length > 0) {
           setCategoryName(response.data.data[0].category?.name || 'Category')
         }
       } catch (error) {
-        console.error('Error:', error)
+        console.error('Error fetching category products:', error)
       } finally {
         setLoading(false)
       }

@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
-import api from '@/lib/api'
+import api, { getAssetUrl } from '@/lib/api'
 import Navbar from '@/components/Navbar'
 
 export default function SellerProductsPage() {
@@ -19,13 +19,6 @@ export default function SellerProductsPage() {
     brand: '',
     commission_level: '9-6-3'
   })
-
-  // Helper to get full image URL
-  const getImageUrl = (url) => {
-    if (!url) return null
-    if (url.startsWith('http')) return url
-    return `http://localhost:8000${url}`
-  }
 
   useEffect(() => {
     fetchProducts()
@@ -164,7 +157,7 @@ export default function SellerProductsPage() {
                 {images.map((img) => (
                   <div key={img.id} className="relative group aspect-square bg-white rounded-lg border overflow-hidden">
                     <img
-                      src={getImageUrl(img.url)}
+                      src={getAssetUrl(img.url)}
                       alt="Product"
                       className="w-full h-full object-cover"
                     />
@@ -306,7 +299,7 @@ export default function SellerProductsPage() {
                   <div className="w-20 h-20 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
                     {primaryImage ? (
                       <img
-                        src={getImageUrl(primaryImage.url)}
+                        src={getAssetUrl(primaryImage.url)}
                         alt={product.name}
                         className="w-full h-full object-cover"
                       />

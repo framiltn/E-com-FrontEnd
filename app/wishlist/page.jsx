@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { wishlistAPI, cartAPI } from '@/lib/api'
+import { wishlistAPI, cartAPI, getAssetUrl } from '@/lib/api'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
@@ -9,15 +9,6 @@ export default function WishlistPage() {
   const router = useRouter()
   const [wishlist, setWishlist] = useState([])
   const [loading, setLoading] = useState(true)
-
-  // Helper to get full image URL
-  const getImageUrl = (image) => {
-    if (!image) return null
-    const url = typeof image === 'object' ? image.url : image
-    if (!url) return null
-    if (url.startsWith('http')) return url
-    return `http://localhost:8000${url}`
-  }
 
   useEffect(() => {
     fetchWishlist()
@@ -62,7 +53,7 @@ export default function WishlistPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <h1 className="text-3xl font-bold mb-8">My Wishlist</h1>
 
@@ -80,7 +71,7 @@ export default function WishlistPage() {
                 <div className="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
                   {item.product?.images?.[0] ? (
                     <img
-                      src={getImageUrl(item.product.images[0])}
+                      src={getAssetUrl(item.product.images[0])}
                       alt={item.product.name}
                       className="w-full h-full object-cover"
                       onError={(e) => {
@@ -95,7 +86,7 @@ export default function WishlistPage() {
                 <h3 className="font-semibold text-lg mb-2 line-clamp-2">
                   {item.product?.name}
                 </h3>
-                
+
                 <p className="text-2xl font-bold text-primary mb-4">
                   ₹{item.product?.price}
                 </p>

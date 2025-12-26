@@ -1,15 +1,7 @@
 import Link from 'next/link'
+import { getAssetUrl } from '@/lib/api'
 
 export default function ProductCard({ product }) {
-  // Helper to get full image URL
-  const getImageUrl = (image) => {
-    if (!image) return null
-    // Handle object structure from new upload system
-    const url = typeof image === 'object' ? image.url : image
-    if (!url) return null
-    if (url.startsWith('http')) return url
-    return `http://localhost:8000${url}`
-  }
   return (
     <Link href={`/products/${product.id}`}>
       <div className="card hover:shadow-xl transition cursor-pointer">
@@ -17,7 +9,7 @@ export default function ProductCard({ product }) {
         <div className="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
           {product.images && product.images.length > 0 ? (
             <img
-              src={getImageUrl(product.images[0])}
+              src={getAssetUrl(product.images[0])}
               alt={product.name}
               className="w-full h-full object-cover"
               onError={(e) => {
@@ -33,7 +25,7 @@ export default function ProductCard({ product }) {
         <h3 className="font-semibold text-lg mb-2 line-clamp-2">
           {product.name}
         </h3>
-        
+
         <p className="text-gray-600 text-sm mb-3 line-clamp-2">
           {product.description}
         </p>

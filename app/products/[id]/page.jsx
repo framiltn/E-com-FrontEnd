@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { productAPI, cartAPI, wishlistAPI } from '@/lib/api'
+import { productAPI, cartAPI, wishlistAPI, getAssetUrl } from '@/lib/api'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
@@ -15,16 +15,6 @@ export default function ProductDetailsPage({ params }) {
   const [isInCart, setIsInCart] = useState(false)
   const [isInWishlist, setIsInWishlist] = useState(false)
   const [isAddingToWishlist, setIsAddingToWishlist] = useState(false)
-
-  // Helper to get full image URL
-  const getImageUrl = (image) => {
-    if (!image) return null
-    // Handle object structure from new upload system
-    const url = typeof image === 'object' ? image.url : image
-    if (!url) return null
-    if (url.startsWith('http')) return url
-    return `http://localhost:8000${url}`
-  }
 
   useEffect(() => {
     fetchProduct()
@@ -107,7 +97,7 @@ export default function ProductDetailsPage({ params }) {
             <div className="w-full h-96 bg-gray-200 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
               {product.images && product.images.length > 0 ? (
                 <img
-                  src={getImageUrl(product.images.find(i => i.is_primary) || product.images[0])}
+                  src={getAssetUrl(product.images.find(i => i.is_primary) || product.images[0])}
                   alt={product.name}
                   className="w-full h-full object-cover"
                   onError={(e) => {
@@ -123,7 +113,7 @@ export default function ProductDetailsPage({ params }) {
                 {product.images.slice(0, 4).map((img, idx) => (
                   <div key={idx} className="aspect-square bg-gray-200 rounded-lg overflow-hidden cursor-pointer hover:opacity-75 transition">
                     <img
-                      src={getImageUrl(img)}
+                      src={getAssetUrl(img)}
                       alt=""
                       className="w-full h-full object-cover"
                       onError={(e) => e.target.style.display = 'none'}

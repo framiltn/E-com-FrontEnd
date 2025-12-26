@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { cartAPI } from '@/lib/api'
+import { cartAPI, getAssetUrl } from '@/lib/api'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
@@ -9,15 +9,6 @@ export default function CartPage() {
   const router = useRouter()
   const [cart, setCart] = useState(null)
   const [loading, setLoading] = useState(true)
-
-  // Helper to get full image URL
-  const getImageUrl = (image) => {
-    if (!image) return null
-    const url = typeof image === 'object' ? image.url : image
-    if (!url) return null
-    if (url.startsWith('http')) return url
-    return `http://localhost:8000${url}`
-  }
 
   useEffect(() => {
     fetchCart()
@@ -66,7 +57,7 @@ export default function CartPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <h1 className="text-3xl font-bold mb-8">Shopping Cart</h1>
 
@@ -85,10 +76,10 @@ export default function CartPage() {
                 <div key={item.id} className="card flex gap-4">
                   <div className="w-24 h-24 bg-gray-200 rounded-lg flex-shrink-0 flex items-center justify-center overflow-hidden">
                     {item.product?.images?.[0] ? (
-                      <img 
-                        src={getImageUrl(item.product.images[0])} 
-                        alt={item.product.name} 
-                        className="w-full h-full object-cover" 
+                      <img
+                        src={getAssetUrl(item.product.images[0])}
+                        alt={item.product.name}
+                        className="w-full h-full object-cover"
                         onError={(e) => {
                           e.target.style.display = 'none';
                           e.target.nextSibling.style.display = 'flex';
@@ -97,11 +88,11 @@ export default function CartPage() {
                     ) : null}
                     <span className={`text-gray-400 text-xs ${item.product?.images?.[0] ? 'hidden' : 'flex'}`}>No Image</span>
                   </div>
-                  
+
                   <div className="flex-1">
                     <h3 className="font-semibold">{item.product?.name}</h3>
                     <p className="text-gray-600">₹{item.price}</p>
-                    
+
                     <div className="flex items-center gap-2 mt-2">
                       <button
                         onClick={() => updateQuantity(item.product_id, item.quantity - 1)}
@@ -133,7 +124,7 @@ export default function CartPage() {
             <div className="lg:col-span-1">
               <div className="card sticky top-20">
                 <h2 className="text-xl font-bold mb-4">Order Summary</h2>
-                
+
                 <div className="space-y-2 mb-4">
                   <div className="flex justify-between">
                     <span>Subtotal</span>

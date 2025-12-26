@@ -3,7 +3,6 @@ import { useState, useEffect, useCallback } from 'react'
 import { productAPI, getAssetUrl } from '@/lib/api'
 import Navbar from '@/components/Navbar'
 import ProductCard from '@/components/ProductCard'
-import Navbar from '@/components/Navbar'
 
 export default function ProductsPage() {
   const [products, setProducts] = useState([])

@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import Navbar from '@/components/Navbar'
-import Navbar from '@/components/Navbar'
 
 export default function DashboardLayout({ children }) {
     const pathname = usePathname()

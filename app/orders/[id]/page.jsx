@@ -4,7 +4,6 @@ import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { orderAPI } from '@/lib/api'
 import Navbar from '@/components/Navbar'
-import Navbar from '@/components/Navbar'
 
 export default function OrderDetailsPage({ params }) {
   const router = useRouter()

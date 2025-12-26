@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { orderAPI } from '@/lib/api'
 import Navbar from '@/components/Navbar'
-import Navbar from '@/components/Navbar'
 
 export default function OrdersPage() {
   const [orders, setOrders] = useState([])

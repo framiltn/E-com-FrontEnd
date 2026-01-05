@@ -9,23 +9,23 @@ export default function FlipNav({ isAdmin = false }) {
     const [userRole, setUserRole] = useState('')
     const [searchQuery, setSearchQuery] = useState('')
 
-    const checkAuth = () => {
-        const token = localStorage.getItem('token')
-        if (token) {
-            setIsLoggedIn(true)
-            const role = localStorage.getItem('role') || 'buyer'
-            setUserRole(role)
-            if (role === 'buyer') {
-                fetchCartCount()
-            }
-        } else {
-            setIsLoggedIn(false)
-            setUserRole('')
-            setCartCount(0)
-        }
-    }
-
     useEffect(() => {
+        const checkAuth = () => {
+            const token = localStorage.getItem('token')
+            if (token) {
+                setIsLoggedIn(true)
+                const role = localStorage.getItem('role') || 'buyer'
+                setUserRole(role)
+                if (role === 'buyer') {
+                    fetchCartCount()
+                }
+            } else {
+                setIsLoggedIn(false)
+                setUserRole('')
+                setCartCount(0)
+            }
+        }
+
         checkAuth()
         window.addEventListener('authChange', checkAuth)
         return () => window.removeEventListener('authChange', checkAuth)

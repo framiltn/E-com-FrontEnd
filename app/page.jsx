@@ -14,6 +14,26 @@ export default function Home() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    const checkUserRole = async () => {
+      const token = localStorage.getItem('token')
+      if (!token) {
+        setRole('guest')
+        setLoading(false)
+        return
+      }
+
+      try {
+        const res = await authAPI.getUser()
+        const userRole = res.data.role
+        setRole(userRole)
+      } catch (error) {
+        console.error('Failed to fetch user role:', error)
+        setRole('guest')
+      } finally {
+        setLoading(false)
+      }
+    }
+
     checkUserRole()
   }, [])
 

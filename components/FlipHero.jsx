@@ -15,7 +15,7 @@ export default function FlipHero() {
             setCurrentSlide((prev) => (prev + 1) % banners.length)
         }, 4000)
         return () => clearInterval(timer)
-    }, [])
+    }, [banners.length])
 
     return (
         <div className="relative w-full bg-gray-100 overflow-hidden cursor-pointer h-[200px] md:h-[280px]">

@@ -1,12 +1,13 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { affiliateAPI } from '@/lib/api'
-import Navbar from '@/components/Navbar'
 
 export default function AffiliatePage() {
   const [affiliate, setAffiliate] = useState(null)
   const [referrals, setReferrals] = useState([])
   const [loading, setLoading] = useState(true)
+  const [isJoined, setIsJoined] = useState(false)
+  const [joinLoading, setJoinLoading] = useState(false)
 
   useEffect(() => {
     fetchData()
@@ -14,16 +15,34 @@ export default function AffiliatePage() {
 
   const fetchData = async () => {
     try {
-      const [affResponse, refResponse] = await Promise.all([
-        affiliateAPI.getProfile(),
-        affiliateAPI.getReferrals()
-      ])
-      setAffiliate(affResponse.data.data)
-      setReferrals(refResponse.data.data || [])
+      setLoading(true)
+      const affResponse = await affiliateAPI.getProfile().catch(() => null)
+
+      if (affResponse) {
+        setAffiliate(affResponse.data)
+        setIsJoined(true)
+        const refResponse = await affiliateAPI.getReferrals()
+        setReferrals(refResponse.data.data || [])
+      } else {
+        setIsJoined(false)
+      }
     } catch (error) {
       console.error('Error:', error)
     } finally {
       setLoading(false)
+    }
+  }
+
+  const handleJoin = async () => {
+    try {
+      setJoinLoading(true)
+      const res = await affiliateAPI.join()
+      alert(res.data.message)
+      fetchData() // Refresh to show dashboard
+    } catch (error) {
+      alert(error.response?.data?.message || 'Failed to join affiliate program.')
+    } finally {
+      setJoinLoading(false)
     }
   }
 
@@ -35,14 +54,41 @@ export default function AffiliatePage() {
 
   if (loading) return (
     <div className="min-h-screen bg-gray-50">
-      <Navbar />
       <div className="max-w-7xl mx-auto px-4 py-12 text-center">Loading...</div>
+    </div>
+  )
+
+  if (!isJoined) return (
+    <div className="min-h-screen bg-gray-50">
+
+      <div className="max-w-7xl mx-auto px-4 py-12 flex flex-col items-center justify-center min-h-[60vh]">
+        <div className="bg-white p-8 rounded-lg shadow-lg text-center max-w-md w-full">
+          <h1 className="text-3xl font-bold mb-4 text-gray-900">Join the Affiliate Program</h1>
+          <p className="text-gray-600 mb-4">
+            Earn commissions by referring friends and family!
+            Get up to 9% commission on every sale.
+          </p>
+
+          <div className="bg-blue-50 text-blue-800 text-sm p-3 rounded mb-6">
+            <strong>Note:</strong> You must have placed at least one order to be eligible for the affiliate program.
+          </div>
+
+          <button
+            onClick={handleJoin}
+            disabled={joinLoading}
+            className="w-full bg-primary text-white py-3 rounded-md hover:bg-opacity-90 transition-all font-semibold text-lg disabled:opacity-50"
+          >
+            {joinLoading ? 'Joining...' : 'Activate Affiliate Account'}
+          </button>
+        </div>
+      </div>
     </div>
   )
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navbar />
+
+
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <h1 className="text-3xl font-bold mb-8">Affiliate Dashboard</h1>

@@ -30,7 +30,8 @@ export default function RegisterPage() {
       const response = await authAPI.register(formData)
       localStorage.setItem('token', response.data.token)
       localStorage.setItem('role', 'buyer')
-      router.push('/')
+      // Force full reload to update Navbar state
+      window.location.href = '/'
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed')
     } finally {

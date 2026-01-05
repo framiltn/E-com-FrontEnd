@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import Navbar from '@/components/Navbar'
+// import Navbar from '@/components/Navbar'
 import { adminAPI } from '@/lib/api'
 
 export default function AdminSellersPage() {
@@ -38,35 +38,41 @@ export default function AdminSellersPage() {
       alert('Seller approved successfully')
       fetchData()
     } catch (error) {
-      alert('Failed to approve seller')
+      console.error('Approval error:', error)
+      alert('Failed to approve seller: ' + (error.response?.data?.message || error.message))
     }
   }
 
   const rejectSeller = async (id) => {
-    if (!confirm('Reject this seller application?')) return
+    const reason = prompt('Enter rejection reason:')
+    if (reason === null) return // Cancelled
+    if (!reason.trim()) return alert('Rejection reason is required')
+
     try {
-      await adminAPI.rejectApplication(id)
+      await adminAPI.rejectApplication(id, { reason })
       alert('Seller application rejected')
       fetchData()
     } catch (error) {
-      alert('Failed to reject application')
+      console.error('Rejection error:', error)
+      alert('Failed to reject application: ' + (error.response?.data?.message || error.message))
     }
   }
 
   const deleteSeller = async (id) => {
-    if (!confirm('Are you sure you want to remove this seller?')) return
+    if (!confirm('Are you sure you want to remove this seller? This action cannot be undone.')) return
     try {
       await adminAPI.deleteSeller(id)
       setSellers(sellers.filter(seller => seller.id !== id))
       alert('Seller removed successfully')
     } catch (error) {
-      alert('Failed to remove seller')
+      console.error('Delete error:', error)
+      alert('Failed to remove seller: ' + (error.response?.data?.message || error.message))
     }
   }
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navbar />
+
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex justify-between items-center mb-8">

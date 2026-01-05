@@ -20,13 +20,28 @@ export default function LoginPage() {
 
     try {
       const response = await authAPI.login(formData)
+      const apiRole = response.data.role || 'buyer'
+
+      // Block Admin from this public login
+      if (apiRole === 'admin') {
+        setError('Admins must login via the Admin Portal.')
+        setLoading(false)
+        return
+      }
+
       localStorage.setItem('token', response.data.token)
-      localStorage.setItem('role', response.data.role || 'buyer')
+      localStorage.setItem('role', apiRole) // Store actual role for permissions
+
+      // Dispatch event to update navbar immediately
+      window.dispatchEvent(new Event('authChange'))
+
+      // Redirect ALL public users to Home
       router.push('/')
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed')
     } finally {
-      setLoading(false)
+      // setLoading(false) // handled in error/success blocks or let unmount handle it
+      if (!error) setLoading(false) // Only unset if we didn't return early
     }
   }
 
@@ -35,6 +50,8 @@ export default function LoginPage() {
       <div className="max-w-md w-full">
         <div className="card">
           <h1 className="text-3xl font-bold text-center mb-8">Login</h1>
+
+
 
           {error && (
             <div className="bg-red-100 text-red-700 p-3 rounded-lg mb-4">

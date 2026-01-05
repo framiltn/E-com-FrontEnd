@@ -3,7 +3,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { orderAPI } from '@/lib/api'
-import Navbar from '@/components/Navbar'
 
 export default function OrderDetailsPage({ params }) {
   const router = useRouter()
@@ -38,21 +37,18 @@ export default function OrderDetailsPage({ params }) {
 
   if (loading) return (
     <div className="min-h-screen bg-gray-50">
-      <Navbar />
       <div className="max-w-7xl mx-auto px-4 py-12 text-center">Loading...</div>
     </div>
   )
 
   if (!order) return (
     <div className="min-h-screen bg-gray-50">
-      <Navbar />
       <div className="max-w-7xl mx-auto px-4 py-12 text-center">Order not found</div>
     </div>
   )
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navbar />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex justify-between items-center mb-8">

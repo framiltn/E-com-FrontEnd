@@ -1,20 +1,15 @@
+import { Roboto } from 'next/font/google'
 import './globals.css'
 
+const roboto = Roboto({
+  weight: ['300', '400', '500', '700'],
+  subsets: ['latin'],
+  variable: '--font-roboto',
+})
+
 export const metadata = {
-  title: 'Multi-Vendor Marketplace - Shop from Multiple Sellers',
-  description: 'Discover products from verified sellers with secure payments, fast shipping, and affiliate rewards. Join our multi-vendor marketplace today!',
-  keywords: 'marketplace, multi-vendor, e-commerce, online shopping, affiliate marketing',
-  authors: [{ name: 'Your Company Name' }],
-  openGraph: {
-    title: 'Multi-Vendor Marketplace',
-    description: 'Shop from multiple sellers with secure payments and fast shipping',
-    type: 'website',
-    locale: 'en_US',
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  title: 'Marketplace: Online Shopping for Electronics, Apparel, Computers, Books, DVDs & more',
+  description: 'The best online shopping store for Mobiles, Fashion, Electronics, Home Appliances and more.',
 }
 
 export const viewport = {
@@ -22,13 +17,19 @@ export const viewport = {
   initialScale: 1,
 }
 
+import ClientShell from '@/components/ClientShell'
+
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${roboto.variable}`} suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" />
       </head>
-      <body>{children}</body>
+      <body className="font-sans text-text bg-secondary">
+        <ClientShell>
+          {children}
+        </ClientShell>
+      </body>
     </html>
   )
 }

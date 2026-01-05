@@ -92,8 +92,8 @@ export default function CreateProductPage() {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block font-medium mb-2">Price (₹)</label>
-              <input type="number" required className="input-field" value={formData.price} onChange={(e) => setFormData({ ...formData, price: e.target.value })} />
+              <label className="block font-medium mb-2">Price (₹) [Min: 1200]</label>
+              <input type="number" required min="1200" className="input-field" value={formData.price} onChange={(e) => setFormData({ ...formData, price: e.target.value })} />
             </div>
             <div>
               <label className="block font-medium mb-2">Stock</label>

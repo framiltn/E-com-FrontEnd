@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import api from '@/lib/api'
-import Navbar from '@/components/Navbar'
+
 
 export default function AdminDashboard() {
   const [stats, setStats] = useState(null)
@@ -24,56 +24,113 @@ export default function AdminDashboard() {
   }
 
   if (loading) return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar />
-      <div className="max-w-7xl mx-auto px-4 py-12 text-center">Loading...</div>
+    <div className="min-h-screen bg-[#f1f3f6]">
+      <div className="flex justify-center items-center h-[80vh]">
+        <div className="w-10 h-10 border-4 border-t-primary border-gray-200 rounded-full animate-spin"></div>
+      </div>
     </div>
   )
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar />
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <h1 className="text-3xl font-bold mb-8">Admin Dashboard</h1>
+    <div className="min-h-screen bg-[#f1f3f6] font-sans text-sm">
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div className="card">
-            <h3 className="text-gray-600 text-sm mb-2">Total Users</h3>
-            <p className="text-3xl font-bold">{stats?.total_users || 0}</p>
-          </div>
-          <div className="card">
-            <h3 className="text-gray-600 text-sm mb-2">Total Sellers</h3>
-            <p className="text-3xl font-bold text-blue-600">{stats?.total_sellers || 0}</p>
-          </div>
-          <div className="card">
-            <h3 className="text-gray-600 text-sm mb-2">Pending Applications</h3>
-            <p className="text-3xl font-bold text-yellow-600">{stats?.pending_applications || 0}</p>
-          </div>
-          <div className="card">
-            <h3 className="text-gray-600 text-sm mb-2">Pending Products</h3>
-            <p className="text-3xl font-bold text-orange-600">{stats?.pending_products || 0}</p>
-          </div>
-        </div>
+      <div className="w-full pt-4 pb-12 px-2 lg:px-4 gap-4">
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Link href="/admin/sellers" className="card hover:shadow-xl transition text-center">
-            <div className="text-5xl mb-4">👥</div>
-            <h3 className="font-semibold text-lg">Manage Sellers</h3>
-            <p className="text-gray-600 text-sm mt-2">Approve or reject seller applications</p>
-          </Link>
+        {/* MAIN CONTENT */}
+        <div className="flex-1 space-y-4">
 
-          <Link href="/admin/products" className="card hover:shadow-xl transition text-center">
-            <div className="text-5xl mb-4">📦</div>
-            <h3 className="font-semibold text-lg">Manage Products</h3>
-            <p className="text-gray-600 text-sm mt-2">Approve or reject products</p>
-          </Link>
 
-          <Link href="/admin/disputes" className="card hover:shadow-xl transition text-center">
-            <div className="text-5xl mb-4">⚖️</div>
-            <h3 className="font-semibold text-lg">Manage Disputes</h3>
-            <p className="text-gray-600 text-sm mt-2">Resolve customer disputes</p>
-          </Link>
+          {/* Stats Overview */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="bg-white p-4 shadow-sm border-t-4 border-blue-600 rounded-[2px] flex items-center justify-between">
+              <div>
+                <div className="text-gray-500 text-xs font-bold uppercase mb-1">Total Users</div>
+                <div className="text-3xl font-bold text-gray-800">{stats?.total_users || 0}</div>
+              </div>
+              <div className="text-4xl opacity-10">👥</div>
+            </div>
+            <div className="bg-white p-4 shadow-sm border-t-4 border-indigo-600 rounded-[2px] flex items-center justify-between">
+              <div>
+                <div className="text-gray-500 text-xs font-bold uppercase mb-1">Total Sellers</div>
+                <div className="text-3xl font-bold text-gray-800">{stats?.total_sellers || 0}</div>
+              </div>
+              <div className="text-4xl opacity-10">🏪</div>
+            </div>
+            <div className="bg-white p-4 shadow-sm border-t-4 border-yellow-500 rounded-[2px] flex items-center justify-between">
+              <div>
+                <div className="text-gray-500 text-xs font-bold uppercase mb-1">Pending Sellers</div>
+                <div className="text-3xl font-bold text-yellow-600">{stats?.pending_applications || 0}</div>
+              </div>
+              <div className="text-4xl opacity-10">⏳</div>
+            </div>
+            <div className="bg-white p-4 shadow-sm border-t-4 border-red-500 rounded-[2px] flex items-center justify-between">
+              <div>
+                <div className="text-gray-500 text-xs font-bold uppercase mb-1">Pending Products</div>
+                <div className="text-3xl font-bold text-red-600">{stats?.pending_products || 0}</div>
+              </div>
+              <div className="text-4xl opacity-10">📦</div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            {/* Pending Actions */}
+            <div className="bg-white shadow-sm rounded-[2px]">
+              <div className="p-4 border-b border-gray-100 flex justify-between items-center">
+                <h3 className="font-bold text-gray-800">Pending Approvals</h3>
+                <Link href="/admin/sellers" className="text-primary text-xs font-bold uppercase hover:underline">View All</Link>
+              </div>
+              <div className="p-4">
+                {stats?.pending_applications > 0 ? (
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between p-3 bg-yellow-50 border border-yellow-100 rounded-[2px]">
+                      <div className="flex items-center gap-3">
+                        <span className="w-2 h-2 rounded-full bg-yellow-500"></span>
+                        <span className="text-sm font-medium text-gray-700">New Seller Registration: <span className="font-bold">TechStore Pvt Ltd</span></span>
+                      </div>
+                      <button className="text-xs bg-white border border-gray-300 px-3 py-1 rounded hover:bg-gray-50">Review</button>
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-yellow-50 border border-yellow-100 rounded-[2px]">
+                      <div className="flex items-center gap-3">
+                        <span className="w-2 h-2 rounded-full bg-yellow-500"></span>
+                        <span className="text-sm font-medium text-gray-700">Product Approval: <span className="font-bold">iPhone 15 Pro Max</span></span>
+                      </div>
+                      <button className="text-xs bg-white border border-gray-300 px-3 py-1 rounded hover:bg-gray-50">Review</button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="text-center py-8 text-gray-400 text-sm">
+                    No pending actions required. System is up to date.
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* System Health / Quick Links */}
+            <div className="bg-white shadow-sm rounded-[2px]">
+              <div className="p-4 border-b border-gray-100">
+                <h3 className="font-bold text-gray-800">System Status</h3>
+              </div>
+              <div className="p-6 grid grid-cols-2 gap-4">
+                <div className="p-4 bg-green-50 rounded text-center">
+                  <div className="text-green-600 font-bold mb-1">Database</div>
+                  <div className="text-xs text-gray-600">Operational</div>
+                </div>
+                <div className="p-4 bg-green-50 rounded text-center">
+                  <div className="text-green-600 font-bold mb-1">Payment Gateway</div>
+                  <div className="text-xs text-gray-600">Connected</div>
+                </div>
+                <div className="p-4 bg-green-50 rounded text-center">
+                  <div className="text-green-600 font-bold mb-1">Email Service</div>
+                  <div className="text-xs text-gray-600">Active</div>
+                </div>
+                <div className="p-4 bg-red-50 rounded text-center">
+                  <div className="text-red-600 font-bold mb-1">Storage</div>
+                  <div className="text-xs text-gray-600">85% Full</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>

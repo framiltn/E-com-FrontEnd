@@ -2,7 +2,6 @@
 'use client'
 import { useState, useEffect } from 'react'
 import api, { getAssetUrl } from '@/lib/api'
-import Navbar from '@/components/Navbar'
 
 export default function SellerProductsPage() {
   const [products, setProducts] = useState([])
@@ -132,14 +131,13 @@ export default function SellerProductsPage() {
 
   if (loading) return (
     <div className="min-h-screen bg-gray-50">
-      <Navbar />
       <div className="max-w-7xl mx-auto px-4 py-12 text-center">Loading...</div>
     </div>
   )
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navbar />
+
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex justify-between items-center mb-8">
@@ -239,7 +237,7 @@ export default function SellerProductsPage() {
 
               <div className="grid grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2">Price (₹) *</label>
+                  <label className="block text-sm font-medium mb-2">Price (₹) [Min: 1200] *</label>
                   <input
                     type="number"
                     required

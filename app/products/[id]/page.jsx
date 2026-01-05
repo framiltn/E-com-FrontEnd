@@ -92,7 +92,7 @@ export default function ProductDetailsPage({ params }) {
                     onMouseEnter={() => setSelectedImage(img)}
                     className={`w-16 h-16 border-2 rounded-[2px] cursor-pointer overflow-hidden p-1 flex items-center justify-center ${selectedImage?.id === img.id ? 'border-primary' : 'border-transparent hover:border-primary/50'}`}
                   >
-                    <img src={getAssetUrl(img)} className="max-h-full max-w-full object-contain" />
+                    <img src={getAssetUrl(img)} className="max-h-full max-w-full object-contain" alt={`Thumbnail ${idx + 1}`} />
                   </div>
                 ))}
               </div>
@@ -108,6 +108,7 @@ export default function ProductDetailsPage({ params }) {
                 <img
                   src={getAssetUrl(selectedImage || product.images?.[0])}
                   className="max-h-full max-w-full object-contain transition-transform hover:scale-105 duration-300"
+                  alt={product.name}
                 />
               </div>
             </div>
@@ -168,15 +169,15 @@ export default function ProductDetailsPage({ params }) {
               <h3 className="text-sm font-bold text-gray-800 mb-2">Available offers</h3>
               <ul className="space-y-2 text-sm text-gray-700">
                 <li className="flex items-start gap-2">
-                  <img src="https://rukminim1.flixcart.com/www/36/36/promos/06/09/2016/c22c9fc4-0555-4460-8401-bf5c28d7ba29.png?q=90" className="h-4 w-4 mt-0.5" />
+                  <img src="https://rukminim1.flixcart.com/www/36/36/promos/06/09/2016/c22c9fc4-0555-4460-8401-bf5c28d7ba29.png?q=90" className="h-4 w-4 mt-0.5" alt="Offer Icon" />
                   <span><span className="font-medium">Bank Offer</span> 5% Cashback on Axis Bank Card</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <img src="https://rukminim1.flixcart.com/www/36/36/promos/06/09/2016/c22c9fc4-0555-4460-8401-bf5c28d7ba29.png?q=90" className="h-4 w-4 mt-0.5" />
+                  <img src="https://rukminim1.flixcart.com/www/36/36/promos/06/09/2016/c22c9fc4-0555-4460-8401-bf5c28d7ba29.png?q=90" className="h-4 w-4 mt-0.5" alt="Offer Icon" />
                   <span><span className="font-medium">Special Price</span> Get extra 10% off (price inclusive of cashback/coupon)</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <img src="https://rukminim1.flixcart.com/www/36/36/promos/06/09/2016/c22c9fc4-0555-4460-8401-bf5c28d7ba29.png?q=90" className="h-4 w-4 mt-0.5" />
+                  <img src="https://rukminim1.flixcart.com/www/36/36/promos/06/09/2016/c22c9fc4-0555-4460-8401-bf5c28d7ba29.png?q=90" className="h-4 w-4 mt-0.5" alt="Offer Icon" />
                   <span><span className="font-medium">Partner Offer</span> Sign up for Pay Later and get ₹500 Gift Card</span>
                 </li>
               </ul>

@@ -181,7 +181,7 @@ export default function CheckoutPage() {
                 {cart?.items?.map(item => (
                   <div key={item.id} className="flex gap-4 border-b border-gray-100 pb-4 mb-4 last:border-0">
                     <div className="w-24 h-24 flex-shrink-0 flex items-center justify-center">
-                      <img src={getAssetUrl(item.product.images?.[0])} className="max-h-full max-w-full object-contain" />
+                      <img src={getAssetUrl(item.product.images?.[0])} className="max-h-full max-w-full object-contain" alt={item.product.name} />
                     </div>
                     <div className="flex-1">
                       <h4 className="font-medium text-gray-900">{item.product.name}</h4>

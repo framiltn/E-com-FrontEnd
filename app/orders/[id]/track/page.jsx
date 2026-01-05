@@ -12,20 +12,22 @@ export default function OrderTrackingPage() {
     const [error, setError] = useState(null)
 
     useEffect(() => {
-        fetchTracking()
-    }, [id])
-
-    const fetchTracking = async () => {
-        try {
-            const response = await orderAPI.track(id)
-            setTracking(response.data)
-        } catch (err) {
-            setError('Failed to load tracking details')
-            console.error(err)
-        } finally {
-            setLoading(false)
+        const fetchTracking = async () => {
+            try {
+                const response = await orderAPI.track(id)
+                setTracking(response.data)
+            } catch (err) {
+                setError('Failed to load tracking details')
+                console.error(err)
+            } finally {
+                setLoading(false)
+            }
         }
-    }
+
+        if (id) {
+            fetchTracking()
+        }
+    }, [id])
 
     if (loading) return (
         <div className="min-h-screen bg-gray-50 flex items-center justify-center">

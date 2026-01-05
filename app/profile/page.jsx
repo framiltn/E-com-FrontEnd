@@ -307,7 +307,7 @@ export default function ProfilePage() {
               <div className="space-y-4 text-sm">
                 <div>
                   <h4 className="font-bold text-gray-800">What happens when I update my email address (or mobile number)?</h4>
-                  <p className="text-gray-600 mt-1">Your login email id (or mobile number) changes, likewise. You'll receive all your account related communication on your updated email address (or mobile number).</p>
+                  <p className="text-gray-600 mt-1">Your login email id (or mobile number) changes, likewise. You&apos;ll receive all your account related communication on your updated email address (or mobile number).</p>
                 </div>
                 <div>
                   <h4 className="font-bold text-gray-800">When will my Flipkart account be updated with the new email address (or mobile number)?</h4>

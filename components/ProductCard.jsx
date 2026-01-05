@@ -1,5 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
 import Link from 'next/link'
+import Image from 'next/image'
 import { getAssetUrl } from '@/lib/api'
 
 export default function ProductCard({ product }) {
@@ -16,17 +16,16 @@ export default function ProductCard({ product }) {
         {/* Product Image */}
         <div className="w-full h-40 relative flex items-center justify-center mb-2">
           {product.images && product.images.length > 0 ? (
-            <img
+            <Image
               src={getAssetUrl(product.images[0])}
               alt={product.name}
-              className="max-h-full max-w-full object-contain transform group-hover:scale-105 transition-transform duration-300"
-              onError={(e) => {
-                e.target.style.display = 'none';
-                e.target.parentNode.querySelector('.fallback-text').style.display = 'flex';
-              }}
+              fill
+              className="object-contain transform group-hover:scale-105 transition-transform duration-300"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
             />
-          ) : null}
-          <span className={`text-gray-400 fallback-text text-xs ${product.images && product.images.length > 0 ? 'hidden' : 'flex'}`}>No Image</span>
+          ) : (
+            <span className="text-gray-400 fallback-text text-xs flex">No Image</span>
+          )}
         </div>
 
         {/* Product Info */}

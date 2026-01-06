@@ -70,6 +70,8 @@ export default function FlipNav({ isAdmin = false }) {
                             <div className="bg-white rounded-[2px] shadow-sm flex items-center h-9">
                                 <input
                                     type="text"
+                                    name="q"
+                                    id="search-input"
                                     placeholder="Search for products, brands and more"
                                     className="w-full h-full px-4 outline-none text-sm text-gray-700 placeholder-gray-400 bg-transparent"
                                     value={searchQuery}

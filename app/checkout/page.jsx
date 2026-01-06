@@ -164,23 +164,23 @@ export default function CheckoutPage() {
               <div className="p-6">
                 <form onSubmit={handleDeliverHere} className="space-y-4 max-w-lg">
                   <div className="grid grid-cols-2 gap-4">
-                    <input type="text" placeholder="Name" className="p-3 border rounded-[2px] focus:border-primary outline-none"
+                    <input type="text" name="name" id="name" placeholder="Name" className="p-3 border rounded-[2px] focus:border-primary outline-none"
                       value={address.name} onChange={e => setAddress({ ...address, name: e.target.value })} required />
-                    <input type="text" placeholder="10-digit mobile number" className="p-3 border rounded-[2px] focus:border-primary outline-none"
+                    <input type="text" name="phone" id="phone" placeholder="10-digit mobile number" className="p-3 border rounded-[2px] focus:border-primary outline-none"
                       value={address.phone} onChange={e => setAddress({ ...address, phone: e.target.value })} required />
                   </div>
                   <div className="grid grid-cols-2 gap-4">
-                    <input type="text" placeholder="Pincode" className="p-3 border rounded-[2px] focus:border-primary outline-none"
+                    <input type="text" name="pincode" id="pincode" placeholder="Pincode" className="p-3 border rounded-[2px] focus:border-primary outline-none"
                       value={address.pincode} onChange={e => setAddress({ ...address, pincode: e.target.value })} required />
-                    <input type="text" placeholder="Locality" className="p-3 border rounded-[2px] focus:border-primary outline-none"
+                    <input type="text" name="locality" id="locality" placeholder="Locality" className="p-3 border rounded-[2px] focus:border-primary outline-none"
                       value={address.locality} onChange={e => setAddress({ ...address, locality: e.target.value })} required />
                   </div>
-                  <textarea placeholder="Address (Area and Street)" className="w-full p-3 border rounded-[2px] focus:border-primary outline-none" rows="3"
+                  <textarea name="address" id="address" placeholder="Address (Area and Street)" className="w-full p-3 border rounded-[2px] focus:border-primary outline-none" rows="3"
                     value={address.address} onChange={e => setAddress({ ...address, address: e.target.value })} required ></textarea>
                   <div className="grid grid-cols-2 gap-4">
-                    <input type="text" placeholder="City/District/Town" className="p-3 border rounded-[2px] focus:border-primary outline-none"
+                    <input type="text" name="city" id="city" placeholder="City/District/Town" className="p-3 border rounded-[2px] focus:border-primary outline-none"
                       value={address.city} onChange={e => setAddress({ ...address, city: e.target.value })} required />
-                    <input type="text" placeholder="State" className="p-3 border rounded-[2px] focus:border-primary outline-none"
+                    <input type="text" name="state" id="state" placeholder="State" className="p-3 border rounded-[2px] focus:border-primary outline-none"
                       value={address.state} onChange={e => setAddress({ ...address, state: e.target.value })} required />
                   </div>
 

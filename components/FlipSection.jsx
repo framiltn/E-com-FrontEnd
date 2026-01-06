@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 
-export default function FlipSection({ title, products = [], linkText = 'VIEW ALL' }) {
+export default function FlipSection({ title, products = [], linkText = 'VIEW ALL', viewAllLink = '/products' }) {
     // Generate dummy products if none provided for mockup
     const displayProducts = products.length > 0 ? products : []
 
@@ -9,7 +9,7 @@ export default function FlipSection({ title, products = [], linkText = 'VIEW ALL
         <div className="bg-white shadow-sm my-4">
             <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
                 <h2 className="text-xl font-bold text-gray-800">{title}</h2>
-                <Link href="#" className="bg-primary text-white text-sm font-bold px-4 py-2 rounded-[2px] shadow-sm hover:shadow-md transition-shadow">
+                <Link href={viewAllLink} className="bg-primary text-white text-sm font-bold px-4 py-2 rounded-[2px] shadow-sm hover:shadow-md transition-shadow">
                     {linkText}
                 </Link>
             </div>

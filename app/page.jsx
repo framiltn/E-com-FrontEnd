@@ -76,21 +76,21 @@ export default function Home() {
   }
 
   const beautyProducts = [
-    { name: 'Mascara', img: '/images/prod_beauty_mascara.webp', price: 'From ₹399', brand: 'Lakme, Maybelline' },
-    { name: 'Eyeshadow', img: '/images/prod_beauty_palette.webp', price: 'Min. 30% Off', brand: 'Swiss Beauty' },
-    { name: 'Lipstick', img: '/images/prod_beauty_lipstick.webp', price: 'From ₹199', brand: 'Sugar, Elle 18' },
-    { name: 'Compact', img: '/images/prod_beauty_powder.webp', price: 'Up to 40% Off', brand: 'Faces Canada' },
-    { name: 'Soft Toys', img: '/images/icon_cat_toys.png', price: 'From ₹499', brand: 'Disney, Hamleys' },
-    { name: 'Party Snacks', img: '/images/icon_cat_grocery.png', price: 'Buy 1 Get 1', brand: 'Lays, Doritos' },
+    { name: 'Premium Red Lipstick', img: '/images/prod_beauty_mascara.webp', price: 'From ₹1,250', brand: 'MAC' },
+    { name: 'Mascara', img: '/images/prod_beauty_mascara.webp', price: 'From ₹399', brand: 'Maybelline' },
+    { name: 'Eyeshadow Palette', img: '/images/prod_beauty_palette.webp', price: 'Min. 30% Off', brand: 'Swiss Beauty' },
+    { name: 'Soft Toys', img: '/images/prod_toys_soft.png', price: 'From ₹499', brand: 'Disney' },
+    { name: 'California Almonds 500g', img: '/images/icon_cat_grocery.png', price: 'Buy 1 Get 1', brand: 'Happilo' },
+    { name: 'Basmati Rice 5kg', img: '/images/icon_cat_grocery.png', price: 'Buy 1 Get 1', brand: 'India Gate' },
   ];
 
   const homeProducts = [
-    { name: 'King Bed', img: '/images/prod_home_bed.webp', price: 'From ₹12,999', brand: 'Wakefit, Sleepyhead' },
-    { name: 'Luxury Sofa', img: '/images/prod_home_sofa.webp', price: 'Min. 40% Off', brand: 'Bharat Lifestyle' },
-    { name: 'Swing', img: '/images/prod_home_swing.webp', price: 'From ₹5,999', brand: 'DecorNation' },
-    { name: 'Plants', img: '/images/prod_home_plant.webp', price: 'From ₹299', brand: 'Ugaoo, Nurturing' },
-    { name: 'Wall Decor', img: '/images/prod_home_decor_wall_real.png', price: 'Up to 70% Off', brand: 'Best Deal' },
-    { name: 'Showpiece', img: '/images/prod_home_showpiece_real.png', price: 'From ₹199', brand: 'Home Centre' },
+    { name: 'King Size Solid Wood Bed', img: '/images/prod_home_bed.webp', price: 'From ₹35,999', brand: 'Wakefit' },
+    { name: 'Modern Fabric Sofa', img: '/images/prod_home_sofa.webp', price: 'Min. 40% Off', brand: 'IKEA' },
+    { name: 'Hanging Swing', img: '/images/prod_home_swing.webp', price: 'From ₹5,999', brand: 'DecorNation' },
+    { name: 'Indoor Snake Plant', img: '/images/prod_home_plant.webp', price: 'From ₹499', brand: 'Ugaoo' },
+    { name: 'Abstract Wall Monitor Frames', img: '/images/prod_home_decor_wall_real.png', price: 'Up to 70% Off', brand: 'Best Deal' },
+    { name: 'Golden Geometric Showpiece', img: '/images/prod_home_showpiece_real.png', price: 'From ₹1,499', brand: 'Home Centre' },
   ];
 
   return (
@@ -147,7 +147,7 @@ export default function Home() {
           </div>
 
           {/* Beauty, Food, Toys & More */}
-          <FlipSection title="Beauty, Food, Toys & More" linkText="VIEW ALL" products={beautyProducts} />
+          <FlipSection title="Beauty, Food, Toys & More" linkText="VIEW ALL" viewAllLink="/products?category=beauty" products={beautyProducts} />
 
           {/* 3 Column Grid Ad */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-2 my-4">
@@ -163,7 +163,7 @@ export default function Home() {
           </div>
 
           {/* Home & Kitchen Essentials */}
-          <FlipSection title="Home & Kitchen Essentials" products={homeProducts} />
+          <FlipSection title="Home & Kitchen Essentials" viewAllLink="/products?category=home" products={homeProducts} />
 
           {/* More Products grid for browsing */}
           <div className="bg-white shadow-sm p-4 mt-4">

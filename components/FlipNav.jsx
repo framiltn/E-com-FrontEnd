@@ -64,28 +64,34 @@ export default function FlipNav({ isAdmin = false }) {
                 </div>
 
                 {/* Search Bar */}
-                {
-                    !isAdmin && (
-                        <div className="flex-1 max-w-2xl relative">
-                            <div className="bg-white rounded-[2px] shadow-sm flex items-center h-9">
-                                <input
-                                    type="text"
-                                    name="q"
-                                    id="search-input"
-                                    placeholder="Search for products, brands and more"
-                                    className="w-full h-full px-4 outline-none text-sm text-gray-700 placeholder-gray-400 bg-transparent"
-                                    value={searchQuery}
-                                    onChange={(e) => setSearchQuery(e.target.value)}
-                                />
-                                <button className="px-4 text-primary font-bold">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-                    )
-                }
+                {!isAdmin && (
+                    <div className="flex-1 max-w-2xl relative">
+                        <form
+                            onSubmit={(e) => {
+                                e.preventDefault();
+                                if (searchQuery.trim()) {
+                                    window.location.href = `/products?search=${encodeURIComponent(searchQuery.trim())}`;
+                                }
+                            }}
+                            className="bg-white rounded-[2px] shadow-sm flex items-center h-9"
+                        >
+                            <input
+                                type="text"
+                                name="q"
+                                id="search-input"
+                                placeholder="Search for products, brands and more"
+                                className="w-full h-full px-4 outline-none text-sm text-gray-700 placeholder-gray-400 bg-transparent"
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                            />
+                            <button type="submit" className="px-4 text-primary font-bold">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                )}
 
                 {/* Right Actions */}
                 <div className="flex items-center space-x-8">

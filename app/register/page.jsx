@@ -63,6 +63,8 @@ export default function RegisterPage() {
               <label className="block text-sm font-medium mb-2">Full Name</label>
               <input
                 type="text"
+                name="name"
+                id="name"
                 required
                 className="input-field"
                 value={formData.name}
@@ -74,6 +76,8 @@ export default function RegisterPage() {
               <label className="block text-sm font-medium mb-2">Email</label>
               <input
                 type="email"
+                name="email"
+                id="email"
                 required
                 className="input-field"
                 value={formData.email}
@@ -85,6 +89,8 @@ export default function RegisterPage() {
               <label className="block text-sm font-medium mb-2">Password</label>
               <input
                 type="password"
+                name="password"
+                id="password"
                 required
                 minLength={8}
                 className="input-field"
@@ -97,6 +103,8 @@ export default function RegisterPage() {
               <label className="block text-sm font-medium mb-2">Confirm Password</label>
               <input
                 type="password"
+                name="password_confirmation"
+                id="password_confirmation"
                 required
                 className="input-field"
                 value={formData.password_confirmation}

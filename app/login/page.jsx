@@ -68,6 +68,8 @@ export default function LoginPage() {
               <label className="block text-sm font-medium mb-2">Email</label>
               <input
                 type="email"
+                name="email"
+                id="email"
                 required
                 className="input-field"
                 value={formData.email}
@@ -79,6 +81,8 @@ export default function LoginPage() {
               <label className="block text-sm font-medium mb-2">Password</label>
               <input
                 type="password"
+                name="password"
+                id="password"
                 required
                 className="input-field"
                 value={formData.password}

@@ -80,6 +80,8 @@ export default function ProductsPage() {
 
   useEffect(() => {
     // Update state if URL changes (e.g. navigation)
+    setProducts([])
+    setLoading(true)
     setSearch(initialSearch)
     setFilters(prev => ({ ...prev, category: initialCategory }))
   }, [initialSearch, initialCategory])

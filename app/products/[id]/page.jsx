@@ -39,17 +39,39 @@ export default function ProductDetailsPage({ params }) {
         setLoading(false)
       }
     }
+
+    const checkCartStatus = async () => {
+      const token = localStorage.getItem('token')
+      if (!token) return
+
+      try {
+        const res = await cartAPI.get()
+        const inCart = res.data.items?.some(item => item.product_id == params.id)
+        setCartAdded(!!inCart)
+      } catch (error) {
+        console.error('Error checking cart:', error)
+      }
+    }
+
     fetchProduct()
+    checkCartStatus()
+
+    window.addEventListener('cartUpdated', checkCartStatus)
+    return () => window.removeEventListener('cartUpdated', checkCartStatus)
   }, [params.id])
 
   const handleAddToCart = async () => {
+    if (cartAdded) {
+      router.push('/cart')
+      return
+    }
+
     setIsAddingCart(true)
     try {
       await cartAPI.add({ product_id: product.id, quantity: 1 })
       setCartAdded(true)
       toast.success('Added to cart successfully!')
       window.dispatchEvent(new Event('cartUpdated'))
-      // Optional: Redirect to cart or show toast
     } catch (err) {
       console.error(err)
       toast.error(err.response?.data?.error || 'Failed to add to cart')
@@ -120,7 +142,7 @@ export default function ProductDetailsPage({ params }) {
             <div className="flex gap-2 mt-8 lg:px-4">
               <button
                 onClick={handleAddToCart}
-                disabled={isAddingCart || cartAdded}
+                disabled={isAddingCart}
                 className={`flex-1 overflow-hidden py-3.5 rounded-[2px] font-bold text-base lg:text-lg flex items-center justify-center gap-2 shadow-sm transition-colors ${cartAdded ? 'bg-green-600 text-white' : 'bg-header-bg text-white hover:bg-gray-800'}`}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">

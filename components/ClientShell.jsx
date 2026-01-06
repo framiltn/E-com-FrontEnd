@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import FlipNav from '@/components/FlipNav'
 import FlipSubNav from '@/components/FlipSubNav'
 import Footer from '@/components/Footer'
+import { Toaster } from 'react-hot-toast'
 
 export default function ClientShell({ children }) {
     const pathname = usePathname()
@@ -56,6 +57,8 @@ export default function ClientShell({ children }) {
                     {shouldShowCategories && <FlipSubNav />}
                 </>
             )}
+
+            <Toaster position="top-center" reverseOrder={false} />
 
             {children}
 

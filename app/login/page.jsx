@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { authAPI } from '@/lib/api'
+import toast from 'react-hot-toast'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -36,12 +37,15 @@ export default function LoginPage() {
       window.dispatchEvent(new Event('authChange'))
 
       // Redirect ALL public users to Home
+      toast.success('Login successful! Redirecting...')
       router.push('/')
     } catch (err) {
-      setError(err.response?.data?.message || 'Login failed')
+      const msg = err.response?.data?.message || 'Login failed'
+      toast.error(msg)
+      setError(msg)
     } finally {
       // setLoading(false) // handled in error/success blocks or let unmount handle it
-      if (!error) setLoading(false) // Only unset if we didn't return early
+      setLoading(false)
     }
   }
 

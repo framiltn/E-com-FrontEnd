@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { cartAPI, getAssetUrl } from '@/lib/api'
+import toast from 'react-hot-toast'
 
 export default function CartPage() {
   const router = useRouter()
@@ -28,8 +29,10 @@ export default function CartPage() {
     try {
       await cartAPI.update({ product_id: productId, quantity })
       fetchCart()
+      toast.success('Cart updated')
     } catch (error) {
       console.error('Error:', error)
+      toast.error('Failed to update cart')
     }
   }
 
@@ -37,8 +40,11 @@ export default function CartPage() {
     try {
       await cartAPI.remove({ product_id: productId })
       fetchCart()
+      toast.success('Item removed from cart')
+      window.dispatchEvent(new Event('cartUpdated'))
     } catch (error) {
       console.error('Error:', error)
+      toast.error('Failed to remove item')
     }
   }
 

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { productAPI, cartAPI, wishlistAPI, reviewAPI, getAssetUrl } from '@/lib/api'
+import toast from 'react-hot-toast'
 
 export default function ProductDetailsPage({ params }) {
   const router = useRouter()
@@ -46,10 +47,12 @@ export default function ProductDetailsPage({ params }) {
     try {
       await cartAPI.add({ product_id: product.id, quantity: 1 })
       setCartAdded(true)
+      toast.success('Added to cart successfully!')
       window.dispatchEvent(new Event('cartUpdated'))
       // Optional: Redirect to cart or show toast
     } catch (err) {
       console.error(err)
+      toast.error(err.response?.data?.error || 'Failed to add to cart')
     } finally {
       setIsAddingCart(false)
     }

@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { authAPI } from '@/lib/api'
+import toast from 'react-hot-toast'
 
 export default function RegisterPage() {
   const router = useRouter()
@@ -30,10 +31,16 @@ export default function RegisterPage() {
       const response = await authAPI.register(formData)
       localStorage.setItem('token', response.data.token)
       localStorage.setItem('role', 'buyer')
-      // Force full reload to update Navbar state
-      window.location.href = '/'
+
+      toast.success('Registration successful! Welcome!')
+
+      // Update Navbar state
+      window.dispatchEvent(new Event('authChange'))
+      router.push('/')
     } catch (err) {
-      setError(err.response?.data?.message || 'Registration failed')
+      const msg = err.response?.data?.message || 'Registration failed'
+      toast.error(msg)
+      setError(msg)
     } finally {
       setLoading(false)
     }

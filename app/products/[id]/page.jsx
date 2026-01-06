@@ -58,9 +58,9 @@ export default function ProductDetailsPage({ params }) {
     }
   }
 
-  const handleBuyNow = async () => {
-    await handleAddToCart();
-    router.push('/checkout');
+  const handleBuyNow = () => {
+    // Direct buy - bypass cart
+    router.push(`/checkout?product_id=${product.id}&quantity=1`);
   }
 
   if (loading) return (

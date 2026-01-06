@@ -1,11 +1,15 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import { cartAPI, checkoutAPI, authAPI, getAssetUrl } from '@/lib/api'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { cartAPI, checkoutAPI, authAPI, getAssetUrl, productAPI } from '@/lib/api'
 
 
 export default function CheckoutPage() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const directProductId = searchParams.get('product_id')
+  const directQuantity = searchParams.get('quantity') ? parseInt(searchParams.get('quantity')) : 1
+
   const [cart, setCart] = useState(null)
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -19,8 +23,36 @@ export default function CheckoutPage() {
 
   useEffect(() => {
     checkUser()
-    fetchCart()
-  }, [])
+    if (directProductId) {
+      fetchDirectItem()
+    } else {
+      fetchCart()
+    }
+  }, [directProductId])
+
+  const fetchDirectItem = async () => {
+    try {
+      const response = await productAPI.getById(directProductId)
+      const product = response.data.data
+
+      // Construct a temporary cart object for display
+      setCart({
+        items: [{
+          id: 'direct',
+          product_id: product.id,
+          quantity: directQuantity,
+          price: product.price,
+          product: product
+        }],
+        total: product.price * directQuantity
+      })
+    } catch (error) {
+      console.error('Error fetching direct item:', error)
+      router.push('/') // Fallback
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const checkUser = async () => {
     try {
@@ -66,10 +98,19 @@ export default function CheckoutPage() {
     await new Promise(resolve => setTimeout(resolve, 2000))
 
     try {
-      await checkoutAPI.process({
+      const payload = {
         shipping_address: address,
         payment_method: paymentMethod
-      })
+      }
+
+      if (directProductId) {
+        payload.items = [{
+          product_id: directProductId,
+          quantity: directQuantity
+        }]
+      }
+
+      await checkoutAPI.process(payload)
       alert(paymentMethod === 'cod' ? 'Order Placed Successfully!' : 'Payment Successful! Order Placed.')
       router.push('/orders')
     } catch (err) {

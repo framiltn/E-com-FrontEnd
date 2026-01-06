@@ -27,8 +27,14 @@ export default function FlipNav({ isAdmin = false }) {
         }
 
         checkAuth()
+        checkAuth()
         window.addEventListener('authChange', checkAuth)
-        return () => window.removeEventListener('authChange', checkAuth)
+        window.addEventListener('cartUpdated', fetchCartCount)
+
+        return () => {
+            window.removeEventListener('authChange', checkAuth)
+            window.removeEventListener('cartUpdated', fetchCartCount)
+        }
     }, [])
 
     const fetchCartCount = async () => {

@@ -1,8 +1,10 @@
 'use client'
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import { affiliateAPI } from '@/lib/api'
 
 export default function AffiliatePage() {
+  const router = useRouter()
   const [affiliate, setAffiliate] = useState(null)
   const [referrals, setReferrals] = useState([])
   const [loading, setLoading] = useState(true)
@@ -10,6 +12,13 @@ export default function AffiliatePage() {
   const [joinLoading, setJoinLoading] = useState(false)
 
   useEffect(() => {
+    // Check if user is authenticated
+    const token = localStorage.getItem('token')
+    if (!token) {
+      // Redirect to login if not authenticated
+      router.push('/login?redirect=/affiliate')
+      return
+    }
     fetchData()
   }, [])
 

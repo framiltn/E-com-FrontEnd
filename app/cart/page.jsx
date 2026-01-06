@@ -29,7 +29,7 @@ export default function CartPage() {
     try {
       await cartAPI.update({ product_id: productId, quantity })
       fetchCart()
-      toast.success('Cart updated')
+      // toast.success('Cart updated') // Removed as per request
     } catch (error) {
       console.error('Error:', error)
       toast.error('Failed to update cart')

@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { cartAPI, checkoutAPI, authAPI, getAssetUrl } from '@/lib/api'
-import FlipNav from '@/components/FlipNav'
+
 
 export default function CheckoutPage() {
   const router = useRouter()
@@ -83,7 +83,7 @@ export default function CheckoutPage() {
 
   return (
     <div className="min-h-screen bg-[#f1f3f6] font-sans text-sm">
-      <FlipNav />
+
 
       <div className="max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-4 py-8">
         {/* LEFT COLUMN - STEPS */}

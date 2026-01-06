@@ -242,7 +242,7 @@ export default function ProductsPage() {
           </div>
 
           {/* Grid */}
-          <div className="p-4">
+          <div className="p-4" key={`products-${filters.category}-${search}`}>
             {loading ? (
               <div className="flex justify-center py-20">
                 <div className="w-8 h-8 border-4 border-t-primary border-gray-200 rounded-full animate-spin"></div>

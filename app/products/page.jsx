@@ -66,7 +66,10 @@ export default function ProductsPage() {
         console.warn('API parsing failed', e)
       }
 
-      setProducts(data)
+      // De-duplicate products based on ID
+      const uniqueProducts = Array.from(new Map(data.map(item => [item.id, item])).values())
+
+      setProducts(uniqueProducts)
     } catch (error) {
       console.warn('API Request Failed', error)
       setProducts([])

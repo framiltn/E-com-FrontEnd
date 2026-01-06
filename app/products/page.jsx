@@ -66,8 +66,8 @@ export default function ProductsPage() {
         console.warn('API parsing failed', e)
       }
 
-      // De-duplicate products based on Name to handle database pollution (same product, different IDs)
-      const uniqueProducts = Array.from(new Map(data.map(item => [item.name, item])).values())
+      // De-duplicate products based on Clean Name to handle database pollution
+      const uniqueProducts = Array.from(new Map(data.map(item => [item.name?.toLowerCase().trim(), item])).values())
 
       setProducts(uniqueProducts)
     } catch (error) {

@@ -30,6 +30,7 @@ export default function ProductsPage() {
 
   const fetchProducts = useCallback(async () => {
     setLoading(true)
+    setProducts([]) // Clear old products immediately to prevent showing stale data
     try {
       // Merge state filters with URL params
       const queryParams = {
